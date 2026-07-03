@@ -10,7 +10,7 @@ resource "aws_instance" "jenkins-vm" {
 
   ami = "ami-05d2d839d4f73aafb"
 
-  instance_type = "m7i-flex.large"
+  instance_type = "c7i-flex.large"
 
   key_name = "practicekey"
 
@@ -18,9 +18,9 @@ resource "aws_instance" "jenkins-vm" {
 
   root_block_device {
 
-    volume_size = 50
+  volume_size = 40
 
-    delete_on_termination = true
+  delete_on_termination = true
 
   }
 
