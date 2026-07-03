@@ -58,3 +58,23 @@ sudo apt update && sudo apt install terraform
 
 ########### eksctl
 
+# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+# (Optional) Verify checksum
+curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+
+#install trivy
+sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy -y
+
