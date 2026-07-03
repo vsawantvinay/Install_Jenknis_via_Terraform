@@ -12,7 +12,7 @@ resource "aws_instance" "jenkins-vm" {
 
   instance_type = "c7i-flex.large"
 
-  key_name = "practicekey"
+  key_name = "privatelaptop"
 
   user_data = file("install.sh")
 
