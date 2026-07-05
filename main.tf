@@ -10,7 +10,7 @@ resource "aws_instance" "jenkins-vm" {
 
   ami = "ami-05d2d839d4f73aafb"
 
-  instance_type = "c7i-flex.large"
+  instance_type = "m7i-flex.large"
 
   key_name = "private-laptop-home"
 
